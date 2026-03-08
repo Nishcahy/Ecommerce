@@ -1,0 +1,39 @@
+package com.nishchay.identity_service.config;
+
+import com.nishchay.identity_service.dto.RoleDto;
+import com.nishchay.identity_service.dto.UserDto;
+import com.nishchay.identity_service.entity.Role;
+import com.nishchay.identity_service.entity.UserCredentials;
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
+@Configuration
+public class ModelMapperConfig {
+
+    @Bean
+    public ModelMapper modelMapper(){
+        ModelMapper modelMapper=new ModelMapper();
+
+        modelMapper.typeMap(Role.class, RoleDto.class)
+                .addMappings(mapper->mapper.map(Role::getRole,RoleDto::setAuthority));
+
+        modelMapper.typeMap(UserCredentials.class, UserDto.class)
+                .addMappings(mapper->mapper.skip(UserDto::setRoles))
+                .setPostConverter(context->{
+                    UserCredentials source=context.getSource();
+                    UserDto destination=context.getDestination();
+
+                    Set<RoleDto> roleDtos=source.getRoles().stream()
+                            .map(role->modelMapper.map(role, RoleDto.class))
+                            .collect(Collectors.toSet());
+
+                    destination.setRoles(roleDtos);
+                    return destination;
+                });
+        return modelMapper;
+    }
+}
