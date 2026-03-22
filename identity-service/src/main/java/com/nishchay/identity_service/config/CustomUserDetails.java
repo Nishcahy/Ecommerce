@@ -79,7 +79,7 @@ public class CustomUserDetails implements UserDetails {
 
     public static CustomUserDetails build(UserCredentials user){
         List<GrantedAuthority> authorities=user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRole().name()))
+                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
 
         Set<String> permissions=user.getPermissions().stream()

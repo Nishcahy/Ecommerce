@@ -25,13 +25,13 @@ public class JwtServiceImpl implements JwtService {
         try{
             Jwts.parser().verifyWith(getSecretKey()).build().parseSignedClaims(token);
         }catch (SecurityException | MalformedJwtException e){
-            throw new AuthenticationCredentialsNotFoundException("JWt Expored or incorrect");
+            throw new AuthenticationCredentialsNotFoundException("JWT Expired or incorrect");
         }catch (ExpiredJwtException e){
             throw new AuthenticationCredentialsNotFoundException("Jwt Token Expired");
         }catch (UnsupportedJwtException e){
             throw new AuthenticationCredentialsNotFoundException("Unsupported JWT token");
         }catch (Exception e){
-            throw new RuntimeException("Exception occured for JWT token "+e.getMessage());
+            throw new RuntimeException("Exception occurred for JWT token "+e.getMessage());
         }
 
     }

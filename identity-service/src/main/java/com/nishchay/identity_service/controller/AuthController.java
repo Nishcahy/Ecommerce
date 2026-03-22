@@ -75,6 +75,7 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/profile")
     public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal UserDetails currentUser){
         try{
             UserDto userDto=userService.getUserByUsername(currentUser.getUsername());

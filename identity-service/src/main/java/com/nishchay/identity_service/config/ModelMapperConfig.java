@@ -19,7 +19,7 @@ public class ModelMapperConfig {
         ModelMapper modelMapper=new ModelMapper();
 
         modelMapper.typeMap(Role.class, RoleDto.class)
-                .addMappings(mapper->mapper.map(Role::getRole,RoleDto::setAuthority));
+                .addMappings(mapper->mapper.map(Role::getName,RoleDto::setAuthority));
 
         modelMapper.typeMap(UserCredentials.class, UserDto.class)
                 .addMappings(mapper->mapper.skip(UserDto::setRoles))

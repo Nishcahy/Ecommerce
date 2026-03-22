@@ -19,6 +19,6 @@ public class Role {
 
     @Column(nullable = false,unique = true)
     @Enumerated(EnumType.STRING)
-    private ERole role;
+    private ERole name;
 
 }

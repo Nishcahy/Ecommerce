@@ -67,7 +67,7 @@ public class AuthServiceImpl implements AuthService {
 
 
         } catch (Exception e) {
-            throw new RuntimeException("User Registration failed"+e.getMessage());
+            throw new RuntimeException("User Registration failed "+e.getMessage());
         }
 
     }
