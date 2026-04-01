@@ -10,15 +10,18 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiResponce<T> {
-    private LocalDateTime localDateTime;
+    private LocalDateTime timeStamp;
     private T data;
     private int statusCode;
 
     public ApiResponce(T data,int statusCode){
-        this.localDateTime=LocalDateTime.now();
+        this.timeStamp=LocalDateTime.now();
         this.data=data;
         this.statusCode=statusCode;
 
     }
 
+    public void setTimeStamp(LocalDateTime timeStamp){
+        this.timeStamp=timeStamp;
+    }
 }
