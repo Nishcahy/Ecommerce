@@ -31,3 +31,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  redis:
+    host: ${SPRING_REDIS_HOST:localhost}
+    port: ${SPRING_REDIS_PORT:6379}
+    timeout: ${SPRING_REDIS_TIMEOUT:60000}
