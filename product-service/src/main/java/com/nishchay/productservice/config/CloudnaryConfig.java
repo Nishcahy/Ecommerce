@@ -1,4 +1,8 @@
-package com.nishchay.productservice.config;
+    @ConditionalOnProperty(
+        name = "cloudinary.cloud-name",
+        matchIfMissing = false
+    )
+    @Value("${cloudinary.api-secret:}")
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;

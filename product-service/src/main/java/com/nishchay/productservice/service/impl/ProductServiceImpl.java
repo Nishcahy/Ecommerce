@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRedis productDAO;
     private final CloudinaryService cloudinaryService;
 
-    @Value("${cloudinary.cloud_name}")
+    @Value("${cloudinary.cloud-name}")
     private String cloudName;
 
     public String getFileExtension(MultipartFile file) {

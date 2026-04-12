@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class OrderConsumaer {
+public class OrderConsumer {
 
-    private final Logger logger= LoggerFactory.getLogger(OrderConsumaer.class);
+    private final Logger logger= LoggerFactory.getLogger(OrderConsumer.class);
     private final ProductVariantService productVariantService;
 
     @KafkaListener(topics = "${spring.kafka.create-order-topic.name}", groupId = "${spring.kafka.consumer.group-id}")

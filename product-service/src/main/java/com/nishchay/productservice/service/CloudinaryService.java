@@ -37,7 +37,7 @@ public class CloudinaryService {
                     "quality", "auto:good"
             ));
 
-            String url=cloudinary.url().generate(uploadResult.get("publicId").toString());
+            String url=cloudinary.url().generate(uploadResult.get("public_id").toString());
             log.info("Image uploaded successfully to Cloudinary. URL: {}", url);
 
 
