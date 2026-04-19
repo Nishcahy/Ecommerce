@@ -12,7 +12,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class ProductServiceApplication {
 
     public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.load();
+        Dotenv dotenv = Dotenv.configure()
+                .ignoreIfMissing()
+                .load();
         SpringApplication.run(ProductServiceApplication.class, args);
     }
 

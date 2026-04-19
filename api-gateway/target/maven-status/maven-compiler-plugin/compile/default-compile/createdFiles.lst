@@ -1,8 +1,0 @@
-com\nishchay\apigateway\filter\AuthenticationFilter$Config.class
-com\nishchay\apigateway\filter\RouterValidator.class
-com\nishchay\apigateway\ApiGatewayApplication.class
-com\nishchay\apigateway\util\JwtUtil.class
-com\nishchay\apigateway\config\AppConfig.class
-com\nishchay\apigateway\filter\AuthenticationFilter.class
-com\nishchay\apigateway\filter\RoleBasedAccessFilter.class
-com\nishchay\apigateway\filter\RoleBasedAccessFilter$Config.class

@@ -1,0 +1,8 @@
+D:\Ecommerce\email-service\src\main\java\com\nishchay\email_service\config\MailConfig.java
+D:\Ecommerce\email-service\src\main\java\com\nishchay\email_service\dto\ProductResponseDto.java
+D:\Ecommerce\email-service\src\main\java\com\nishchay\email_service\dto\ProductStockResponseDto.java
+D:\Ecommerce\email-service\src\main\java\com\nishchay\email_service\dto\StockResponseDto.java
+D:\Ecommerce\email-service\src\main\java\com\nishchay\email_service\EmailServiceApplication.java
+D:\Ecommerce\email-service\src\main\java\com\nishchay\email_service\kafka\OrderConsumer.java
+D:\Ecommerce\email-service\src\main\java\com\nishchay\email_service\service\EmailService.java
+D:\Ecommerce\email-service\src\main\java\com\nishchay\email_service\service\ProductApiClient.java

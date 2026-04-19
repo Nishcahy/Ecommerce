@@ -1,5 +1,6 @@
 package com.nishchay.productservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class AttributeValue {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_variant_id", nullable = false)
+    @JsonIgnore
     private ProductVariant productVariant;
 
     @ManyToOne(fetch = FetchType.LAZY)

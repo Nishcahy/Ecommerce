@@ -3,8 +3,8 @@ spring:
     name: product-service
 
   kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     producer:
-      bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
@@ -56,17 +56,20 @@ spring:
         enabled: false
 
 server:
-  port: 8084
+  port: 9088
 
 cloudinary:
-  cloud-name: ${CLOUDINARY_CLOUD_NAME:}
-  api-key: ${CLOUDINARY_API_KEY:}
-  api-secret: ${CLOUDINARY_API_SECRET:}
+  cloud-name: ${CLOUDINARY_CLOUD_NAME:dzhvltob2}
+  api-key: ${CLOUDINARY_API_KEY:552733925718967}
+  api-secret: ${CLOUDINARY_API_SECRET:Ik83pnG9Dk1m124v5p5OTgSakys}
 
 eureka:
   client:
+    enabled: true
     serviceUrl:
       defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka/}
+  instance:
+    prefer-ip-address: true
 
 management:
   endpoints:

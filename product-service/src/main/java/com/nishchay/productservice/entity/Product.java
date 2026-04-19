@@ -1,5 +1,6 @@
 package com.nishchay.productservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nishchay.commonlib.entity.AbstractEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -47,5 +48,6 @@ public class Product extends AbstractEntity {
     private Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<ProductVariant> variants = new ArrayList<>();
 }

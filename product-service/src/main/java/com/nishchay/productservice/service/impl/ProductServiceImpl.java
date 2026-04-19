@@ -31,6 +31,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,28 +57,43 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    @Transactional
     @Override
-    public ProductResponseDto saveProduct(CreateProductRequestDto createProductRequestDto) {
-        try{
-            String publicId = System.currentTimeMillis() + "_" + createProductRequestDto.getMultipartFile().getOriginalFilename().replace(".jpg", "");
-            String preUrl = "https://res.cloudinary.com/" + cloudName + "/image/upload/" + publicId + "." + getFileExtension(createProductRequestDto.getMultipartFile());
-            Product product = modelMapper.map(createProductRequestDto, Product.class);
+    @Transactional
+    public ProductResponseDto saveProduct(CreateProductRequestDto dto) {
+
+        try {
+
+            MultipartFile file = dto.getMultipartFile();
+
+            if (file == null || file.isEmpty()) {
+                throw new ProductException("Image is required", HttpStatus.BAD_REQUEST);
+            }
+
+            LOGGER.info("Received file: {}, size: {}", file.getOriginalFilename(), file.getSize());
+
+            String publicId = System.currentTimeMillis() + "_" +
+                    file.getOriginalFilename();
+
+            // ✅ convert BEFORE async
+            byte[] fileBytes = file.getBytes();
+            LOGGER.info("Converted to bytes, length: {}", fileBytes.length);
+
+            CompletableFuture<String> futureUrl =
+                    cloudinaryService.uploadImage(fileBytes, publicId);
+
+            String imageUrl = futureUrl.get();
+            LOGGER.info("Got image URL: {}", imageUrl);
+
+            Product product = modelMapper.map(dto, Product.class);
             product.setId(UUID.randomUUID().toString());
-            product.setImageUrl(preUrl);
-            Product savedProduct = productRepository.save(product);
+            product.setImageUrl(imageUrl);
 
-            productDAO.save(savedProduct);
-
-            cloudinaryService.uploadImage(createProductRequestDto.getMultipartFile(), publicId);
-            return modelMapper.map(savedProduct, ProductResponseDto.class);
+            return modelMapper.map(productRepository.save(product), ProductResponseDto.class);
 
         } catch (Exception e) {
-            throw new ProductException("Failed to create product: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+            throw new ProductException("Failed: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-
     }
-
     @Override
     public ProductResponseDto getProductById(String id) {
 

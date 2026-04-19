@@ -1,0 +1,6 @@
+com\nishchay\email_service\dto\ProductStockResponseDto.class
+com\nishchay\email_service\EmailServiceApplication.class
+com\nishchay\email_service\dto\StockResponseDto.class
+com\nishchay\email_service\kafka\OrderConsumer.class
+com\nishchay\email_service\dto\ProductResponseDto.class
+com\nishchay\email_service\config\MailConfig.class
