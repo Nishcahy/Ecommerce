@@ -10,7 +10,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 @Configuration
 public class KafkaTopicConfig {
 
-    @Value("${spring.kafka.topic.order}")
+    @Value("${spring.kafka.topic-name}")
     private String orderTopic;
 
     @Value("${spring.kafka.create-order-topic.name}")

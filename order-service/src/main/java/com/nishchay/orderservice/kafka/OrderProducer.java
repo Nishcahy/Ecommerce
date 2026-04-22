@@ -11,12 +11,13 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
+
 public class OrderProducer {
     private static final Logger LOGGER= LoggerFactory.getLogger(OrderProducer.class);
 
-    private NewTopic newTopic;
+    private final NewTopic newTopic;
 
-    private KafkaTemplate<String, OrderEventDTO> kafkaTemplate;
+    private final KafkaTemplate<String, OrderEventDTO> kafkaTemplate;
 
     public OrderProducer(NewTopic newTopic, KafkaTemplate<String, OrderEventDTO> kafkaTemplate) {
         this.newTopic = newTopic;
