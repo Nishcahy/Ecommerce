@@ -1,3 +1,5 @@
+server:
+  port: 9898
 spring:
   application:
     name: identity-service
@@ -12,8 +14,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
 
-server:
-  port: 9898
+
 
 management:
   tracing:
@@ -28,8 +29,8 @@ management:
         include: "*"
 eureka:
   client:
-    enabled: false
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka/}
+    enabled: true
+
+
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka/}

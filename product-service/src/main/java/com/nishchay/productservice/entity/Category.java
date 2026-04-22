@@ -1,5 +1,6 @@
 package com.nishchay.productservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nishchay.commonlib.entity.AbstractEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,16 +19,17 @@ import java.util.Set;
 public class Category extends AbstractEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     private String name;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "parent_id")
+    @JsonIgnore
     private Category parent;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<Category> children;
 
     @ManyToMany(mappedBy = "categories")
