@@ -23,11 +23,21 @@ spring:
     username: ${SPRING_MAIL_USERNAME:nishchaynilekani@gmail.com}
     password: ${SPRING_MAIL_PASSWORD:nnn@2002}
 
+server:
+  port: 8086
+
+management:
+  tracing:
+    export:
+      zipkin:
+        endpoint: http://127.0.0.1:9411/
+    sampling:
+      probability: 1
 eureka:
   client:
     enabled: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
   instance:
+    instance-id: ${spring.application.name}:${server.port}
     prefer-ip-address: true
-
+    ip-address: 127.0.0.1
+    hostname: localhost

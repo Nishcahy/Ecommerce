@@ -25,7 +25,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     private final JwtUtil jwtUtil;
 
 
-    private final ObjectMapper objectMapper;  // Sử dụng để serialize ApiResponse
+    private final ObjectMapper objectMapper;
 
     public AuthenticationFilter(RouterValidator routeValidator, JwtUtil jwtUtil, ObjectMapper objectMapper) {
         super(Config.class);
@@ -68,20 +68,20 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 request.getCookies().getFirst("token").getValue() : null;
     }
 
-    // Hàm để trả về phản hồi lỗi tùy chỉnh
+
     private Mono<Void> onError(ServerWebExchange exchange, String errorMessage, HttpStatus httpStatus) {
         exchange.getResponse().setStatusCode(httpStatus);
         exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
 
         ApiResponce<String> apiResponse = new ApiResponce<>(errorMessage, httpStatus.value());
         try {
-            // Chuyển ApiResponse thành JSON
+
             byte[] bytes = objectMapper.writeValueAsString(apiResponse).getBytes(StandardCharsets.UTF_8);
 
             return exchange.getResponse().writeWith(Mono.just(exchange.getResponse()
                     .bufferFactory().wrap(bytes)));
         } catch (Exception e) {
-            // Xử lý nếu gặp lỗi trong quá trình serialize
+
             return Mono.error(e);
         }
     }

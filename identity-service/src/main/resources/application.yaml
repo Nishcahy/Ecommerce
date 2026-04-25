@@ -30,6 +30,11 @@ management:
 eureka:
   client:
     enabled: true
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    hostname: localhost
 
 
     service-url:

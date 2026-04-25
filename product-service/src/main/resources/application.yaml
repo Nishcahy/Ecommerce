@@ -65,11 +65,16 @@ cloudinary:
 
 eureka:
   client:
-    enabled: true
-    serviceUrl:
-      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka/}
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE:http://localhost:8761/eureka/}
+    register-with-eureka: true
+    fetch-registry: true
   instance:
+    instance-id: ${spring.application.name}:${server.port}
     prefer-ip-address: true
+    ip-address: 127.0.0.1
+    hostname: localhost
+
 
 management:
   endpoints:
